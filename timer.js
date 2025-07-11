@@ -1,7 +1,8 @@
 let displayedTimer = document.getElementById("timer-display");
-let timer = null;
-let duration = 0;
-let remainingTime = 0;
+// default values to start with, if set to null and zeros, gotta click on Pomodoro button so that the timer can be activated
+let timer = 60 * 25;
+let duration = 60 * 25;
+let remainingTime = 60 * 25;
 
 function setPomodoro() {
   setTimer(60 * 25);
@@ -13,19 +14,20 @@ function setLongBreak() {
   setTimer(60 * 10);
 }
 function setTimer(seconds) {
-  clearInterval(timer); // clear the existing timer
+  clearInterval(timer); // clear the existing timer - stop
   duration = seconds;
   remainingTime = seconds;
   updateDisplay();
 }
+
+// display in mm:ss
 function updateDisplay() {
-  const minutes = Math.floor(duration / 60);
-  let seconds = duration % 60;
+  const minutes = Math.floor(remainingTime / 60);
+  let seconds = remainingTime % 60;
   // convert nums to string so that they can be padded
   displayedTimer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
     seconds
   ).padStart(2, "0")}`;
-  duration--;
 }
 function start() {
   clearInterval(timer);
@@ -40,5 +42,9 @@ function start() {
   }, 1000);
 }
 function reset() {
-    setPomodoro();
+  clearInterval(timer);
+  setTimer(duration);
+}
+function pause() {
+  clearInterval(timer); // stop with the current displayed time, not clear things out completely
 }
