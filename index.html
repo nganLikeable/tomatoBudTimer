@@ -20,10 +20,10 @@
       </header>
       <!-- set the time -->
       <div class="option-button">
-        <button onclick="setPomodoro()">POMODORO</button>
-        <button onclick="setShortBreak()">SHORT BREAK</button>
-        <button onclick="setLongBreak()">LONG BREAK</button>
-        <button id="customTimer" onclick="openModal()">CUSTOM TIMER</button>
+        <button id="pomodoro-btn">POMODORO</button>
+        <button id="short-break-btn">SHORT BREAK</button>
+        <button id="long-break-btn">LONG BREAK</button>
+        <button id="custom-timer-btn">CUSTOM TIMER</button>
         <!-- custom timer modal -->
       </div>
       <div id="tomato-image">
@@ -61,7 +61,9 @@
               <input id="customLongBreak" type="number" value="10" min="1" />
             </div>
             <hr />
-            <button id="save-time" onclick="saveCustomTime()">Save</button>
+            <button id="save-time" type="submit" onclick="saveCustomTime()">
+              Save
+            </button>
           </form>
         </div>
       </div>

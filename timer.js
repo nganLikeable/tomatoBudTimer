@@ -14,17 +14,6 @@ let endSound = document.querySelector("#audio");
 // for keypress Enter
 let isRunning = false;
 
-window.addEventListener("keydown", function (event) {
-  if (event.code === "Enter") {
-    if (isRunning) {
-      pause();
-    } else {
-      start();
-    }
-    isRunning = !isRunning;
-  }
-});
-
 function setPomodoro() {
   setTimer(60 * pomodoro);
 }
@@ -73,7 +62,7 @@ function pause() {
 
 // modal
 const modal = document.getElementById("modal");
-const openModalBtn = document.getElementById("customTimer");
+const openModalBtn = document.getElementById("custom-timer-btn");
 const closeModalBtn = document.getElementById("close-modal");
 
 function openModal() {
@@ -82,19 +71,60 @@ function openModal() {
 function closeModal() {
   modal.style.display = "none";
 }
+
+// Save custom time
 const saveButton = document.getElementById("save-time");
+
 function saveCustomTime() {
   event.preventDefault();
   pomodoro = document.getElementById("customPomodoro").value;
   shortBreak = document.getElementById("customShortBreak").value;
   longBreak = document.getElementById("customLongBreak").value;
   updateDisplay();
-  //   setPomodoro(pomodoro);
-  //   setShortBreak(shortBreak);
-  //   setLongBreak(longBreak);
+
+  if (lastMode === "pomodoro") {
+    setPomodoro();
+  } else if (lastMode === "shortBreak") {
+    setShortBreak();
+  } else if (lastMode === "longBreak") {
+    setLongBreak();
+  }
+
   closeModal();
 }
+// Track the last clicked button to show the according displayed custom time
+let lastMode = "pomodoro"; // by default
+document.getElementById("pomodoro-btn").addEventListener("click", () => {
+  setPomodoro();
+  lastMode = "pomodoro";
+});
+
+document.getElementById("short-break-btn").addEventListener("click", () => {
+  setShortBreak();
+  lastMode = "shortBreak";
+});
+
+document.getElementById("long-break-btn").addEventListener("click", () => {
+  setLongBreak();
+  lastMode = "longBreak";
+});
+
+document
+  .getElementById("custom-timer-btn")
+  .addEventListener("click", openModal);
+
+window.addEventListener("keydown", function (event) {
+  if (event.code === "Enter") {
+    if (isRunning) {
+      pause();
+    } else {
+      start();
+    }
+    isRunning = !isRunning;
+  }
+});
 saveButton.addEventListener("click", saveCustomTime);
+
 // add custom timer
 // add dark mode
 // add to-do list
