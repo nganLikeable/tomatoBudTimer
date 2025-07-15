@@ -15,6 +15,12 @@
   </head>
   <body>
     <div id="container">
+      <div class="fullscreen">
+        <button id="fullscreen-btn" aria-label="Fullscreen Mode">
+          <i class="material-icons">fullscreen</i>
+        </button>
+      </div>
+
       <header>
         <h1>Pomodoro Timer</h1>
       </header>
@@ -32,13 +38,13 @@
       <div id="timer-display">25:00</div>
       <div class="icons">
         <!-- wrap icons in buttons -->
-        <button onclick="start()" aria-label="Start">
+        <button id="start-btn" aria-label="Start">
           <i class="material-icons">play_arrow</i>
         </button>
-        <button onclick="pause()" aria-label="Pause">
+        <button id="pause-btn" aria-label="Pause">
           <i class="material-icons">pause</i>
         </button>
-        <button onclick="reset()" aria-label="Reset">
+        <button id="reset-btn" aria-label="Reset">
           <i class="material-icons">replay</i>
         </button>
       </div>
@@ -69,9 +75,6 @@
       </div>
 
       <audio id="audio" src="ding.mp3"></audio>
-      <div id="toggle">
-        <i class="material-icons">fullscreen</i>
-      </div>
     </div>
     <script src="timer.js"></script>
   </body>

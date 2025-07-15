@@ -60,6 +60,10 @@ function pause() {
   clearInterval(timer); // stop with the current displayed time, not clear things out completely
 }
 
+document.getElementById("start-btn").addEventListener("click", start);
+document.getElementById("pause-btn").addEventListener("click", pause);
+document.getElementById("reset-btn").addEventListener("click", reset);
+
 // modal
 const modal = document.getElementById("modal");
 const openModalBtn = document.getElementById("custom-timer-btn");
@@ -135,6 +139,7 @@ saveButton.addEventListener("click", saveCustomTime);
 // show the countdown time on the tab
 // add the effect to the current active button - lastMode
 // add upload background options or offer a library of backgrounds/images to choose from
+// fix the sound buttons
 
 // Keep active after click on button
 const optionBtnList = document.querySelectorAll(".option-button button");
@@ -147,4 +152,20 @@ optionBtnList.forEach((btnEl) => {
     });
     btnEl.classList.add("special");
   });
+});
+
+// Fullscreen mode
+const fullscreenBtn = document.getElementById("fullscreen-btn");
+
+fullscreenBtn.addEventListener("click", () => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().then(() => {
+      // scale the screen
+      document.body.classList.add("fullscreen-mode");
+    });
+  } else {
+    document.exitFullscreen().then(() => {
+      document.body.classList.remove("fullscreen-mode");
+    });
+  }
 });

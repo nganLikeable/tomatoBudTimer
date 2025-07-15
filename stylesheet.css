@@ -7,15 +7,34 @@
 body {
   background-color: rgb(255, 237, 157);
 }
+#container {
+  width: 90%;
+  padding: 20px;
+}
 header {
   font-size: 2rem;
 }
 button {
   cursor: pointer;
-  text-align: center;
   display: inline;
 }
+.fullscreen {
+  position: absolute; /*removed from the normal doc flow but placed to the nearest positioned element, which is header"*/
+  top: 50px;
+  right: 10px;
+}
+.fullscreen button {
+  border: none;
+  background-color: rgb(255, 237, 157);
+}
 
+body.fullscreen-mode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Viewport height */
+  margin: 0;
+}
 .option-button button {
   font-size: 1.2rem;
   width: 200px;
@@ -87,12 +106,13 @@ button {
   display: none;
   position: fixed;
   z-index: 1000;
-  left: 0;
-  top: 0;
+  left: 50%;
+  top: 50%;
   width: 100%;
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4); /* semi-transparent black backdrop */
+  transform: translate(-50%, -50%);
 }
 .modal-content {
   background-color: white;
