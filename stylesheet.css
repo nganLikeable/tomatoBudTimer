@@ -24,15 +24,23 @@ button {
   background-color: rgb(128, 18, 18);
   color: rgba(255, 237, 157);
   margin: 20px;
+  transition-duration: 0.5s;
 }
 
 .option-button button:hover {
-  background-color: rgb(175, 53, 53);
+  background-color: rgb(194, 59, 59);
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.option-button button:active {
-  background-color: rgb(83, 4, 4);
+/* .option-button button:active {
+  background-color: rgb(128, 18, 18);
+} */
+.option-button button.special {
+  background-color: rgb(255, 209, 3);
+  color: rgb(128, 18, 18);
 }
-
+.option-button button.special:hover {
+  background-color: rgb(255, 178, 91);
+}
 #timer-display {
   font-size: 7rem;
 }
@@ -73,6 +81,7 @@ button {
 .form-group input:focus {
   border: 3px outset rgb(128, 18, 18);
 }
+
 /*acting as a fill screen semi-transparetn overlay onto the current screen*/
 .modal {
   display: none;

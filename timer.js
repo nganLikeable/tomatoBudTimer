@@ -132,3 +132,19 @@ saveButton.addEventListener("click", saveCustomTime);
 // save the to-do for later
 // add full mode
 // Close modal if clicking outside the modal content (backdrop)
+// show the countdown time on the tab
+// add the effect to the current active button - lastMode
+// add upload background options or offer a library of backgrounds/images to choose from
+
+// Keep active after click on button
+const optionBtnList = document.querySelectorAll(".option-button button");
+optionBtnList.forEach((btnEl) => {
+  btnEl.addEventListener("click", () => {
+    // remove current active button's special class in CSS
+    // classList returns css classNames
+    document.querySelectorAll(".option-button button").forEach((btn) => {
+      btn.classList.remove("special");
+    });
+    btnEl.classList.add("special");
+  });
+});
