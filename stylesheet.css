@@ -136,15 +136,16 @@ body.fullscreen-mode {
   border-bottom: 2px solid rgb(128, 18, 18);
 }
 
-#save-time {
+#save-btn {
   font-size: 1.2rem;
   margin: 5px;
+  height: 50px;
   width: 70px;
   background-color: rgb(128, 18, 18);
   color: rgb(255, 209, 3);
 }
-#save-time:hover,
-#save-time:active {
+#save-btn:hover,
+#save-btn:active {
   cursor: pointer;
   background-color: rgb(175, 53, 53);
 }

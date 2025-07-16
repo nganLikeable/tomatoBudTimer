@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pomodoro Timer</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -33,7 +32,7 @@
         <!-- custom timer modal -->
       </div>
       <div id="tomato-image">
-        <img src="tomato.png" alt="your cute red tomato" />
+        <img src="tomato.gif" alt="your cute red tomato" />
       </div>
       <div id="timer-display">25:00</div>
       <div class="icons">
@@ -48,7 +47,7 @@
           <i class="material-icons">replay</i>
         </button>
       </div>
-      <div class="modal" id="modal">
+      <div class="modal" id="modal-custom-timer">
         <div class="modal-content">
           <span class="close-modal" onclick="closeModal()">&times;</span>
           <!-- &times is unicode of 'x' - multplication symbol-->
@@ -67,10 +66,17 @@
               <input id="customLongBreak" type="number" value="10" min="1" />
             </div>
             <hr />
-            <button id="save-time" type="submit" onclick="saveCustomTime()">
+            <button id="save-btn" type="submit" onclick="saveCustomTime()">
               Save
             </button>
           </form>
+        </div>
+      </div>
+      <div class="modal" id="modal-done">
+        <div class="modal-content">
+          <span class="close-modal" onclick="closeModal()">&times;</span>
+          <h2>Time's up Bud!</h2>
+          <img src="tomato-done.gif" alt="congrats tomato" />
         </div>
       </div>
 

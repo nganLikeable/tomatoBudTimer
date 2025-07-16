@@ -29,6 +29,28 @@ function setTimer(seconds) {
   remainingTime = seconds;
   updateDisplay();
 }
+// modal window
+const customTimerModal = document.getElementById("modal-custom-timer");
+const customTimerBtn = document.getElementById("custom-timer-btn");
+const closeModalBtn = document.getElementById("close-modal");
+
+function openModal(modalEl) {
+  modalEl.style.display = "block";
+}
+function closeModal(modalEl) {
+  modalEl.style.display = "none";
+}
+customTimerBtn.addEventListener("click", () => {
+  openModal(customTimerModal);
+});
+
+document.querySelectorAll(".close-modal").forEach((span) => {
+  span.addEventListener("click", () => {
+    const modal = span.closest(".modal");
+    closeModal(modal);
+  });
+});
+const doneModal = document.getElementById("modal-done");
 
 // display in mm:ss
 function updateDisplay() {
@@ -47,8 +69,8 @@ function start() {
       updateDisplay();
     } else {
       clearInterval(timer);
+      openModal(doneModal);
       endSound.play();
-      alert("Time's up!!");
     }
   }, 1000);
 }
@@ -64,20 +86,8 @@ document.getElementById("start-btn").addEventListener("click", start);
 document.getElementById("pause-btn").addEventListener("click", pause);
 document.getElementById("reset-btn").addEventListener("click", reset);
 
-// modal
-const modal = document.getElementById("modal");
-const openModalBtn = document.getElementById("custom-timer-btn");
-const closeModalBtn = document.getElementById("close-modal");
-
-function openModal() {
-  modal.style.display = "block";
-}
-function closeModal() {
-  modal.style.display = "none";
-}
-
 // Save custom time
-const saveButton = document.getElementById("save-time");
+const saveButton = document.getElementById("save-btn");
 
 function saveCustomTime() {
   event.preventDefault();
@@ -94,7 +104,7 @@ function saveCustomTime() {
     setLongBreak();
   }
 
-  closeModal();
+  closeModal(customTimerModal);
 }
 // Track the last clicked button to show the according displayed custom time
 let lastMode = "pomodoro"; // by default
@@ -129,18 +139,6 @@ window.addEventListener("keydown", function (event) {
 });
 saveButton.addEventListener("click", saveCustomTime);
 
-// add custom timer
-// add dark mode
-// add to-do list
-// add the sound
-// save the to-do for later
-// add full mode
-// Close modal if clicking outside the modal content (backdrop)
-// show the countdown time on the tab
-// add the effect to the current active button - lastMode
-// add upload background options or offer a library of backgrounds/images to choose from
-// fix the sound buttons
-
 // Keep active after click on button
 const optionBtnList = document.querySelectorAll(".option-button button");
 optionBtnList.forEach((btnEl) => {
@@ -169,3 +167,9 @@ fullscreenBtn.addEventListener("click", () => {
     });
   }
 });
+// add dark mode
+// add to-do list
+// save the to-do for later
+// Close modal if clicking outside the modal content (backdrop)
+// show the countdown time on the tab
+// add upload background options or offer a library of backgrounds/images to choose from
