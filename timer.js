@@ -50,7 +50,7 @@ function updateDisplay() {
   // update on-screen timer
   displayedTimer.innerText = display;
   // use display instead of displayedTimer bc the latter is a DOM object
-  document.title = `${display} | Tomato Bud Timer`;
+  document.title = `${display} | TomatoBud Timer`;
 }
 
 function start() {
