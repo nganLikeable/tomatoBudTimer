@@ -9,10 +9,19 @@ let timer = 60 * pomodoro;
 let duration = 60 * pomodoro;
 let remainingTime = 60 * pomodoro;
 
+// future timestamp when session ends
+let endTime;
+
 let endSound = document.querySelector("#audio");
 
 // for keypress Enter
 let isRunning = false;
+function setTimer(seconds) {
+  clearInterval(timer); // clear the existing timer - stop
+  duration = seconds;
+  remainingTime = seconds;
+  updateDisplay();
+}
 
 function setPomodoro() {
   setTimer(60 * pomodoro);
@@ -23,12 +32,16 @@ function setShortBreak() {
 function setLongBreak() {
   setTimer(60 * longBreak);
 }
-function setTimer(seconds) {
-  clearInterval(timer); // clear the existing timer - stop
-  duration = seconds;
-  remainingTime = seconds;
-  updateDisplay();
+// display in mm:ss
+function updateDisplay() {
+  const minutes = Math.floor(remainingTime / 60);
+  let seconds = remainingTime % 60;
+  // convert nums to string so that they can be padded
+  displayedTimer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
+    seconds
+  ).padStart(2, "0")}`;
 }
+
 // modal window
 const customTimerModal = document.getElementById("modal-custom-timer");
 const customTimerBtn = document.getElementById("custom-timer-btn");
@@ -52,27 +65,20 @@ document.querySelectorAll(".close-modal").forEach((span) => {
 });
 const doneModal = document.getElementById("modal-done");
 
-// display in mm:ss
-function updateDisplay() {
-  const minutes = Math.floor(remainingTime / 60);
-  let seconds = remainingTime % 60;
-  // convert nums to string so that they can be padded
-  displayedTimer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
-    seconds
-  ).padStart(2, "0")}`;
-}
 function start() {
   clearInterval(timer);
+
+  // lock in when this session should end
+  endTime = Date.now() + remainingTime * 1000;
   timer = setInterval(() => {
-    if (remainingTime > 0) {
-      remainingTime--;
-      updateDisplay();
-    } else {
+    remainingTime = Math.max(0, Math.round((endTime - Date.now()) / 1000));
+    updateDisplay();
+    if (remainingTime == 0) {
       clearInterval(timer);
       openModal(doneModal);
       endSound.play();
     }
-  }, 1000);
+  }, 300);
 }
 function reset() {
   clearInterval(timer);

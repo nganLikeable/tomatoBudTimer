@@ -101,7 +101,7 @@ body.fullscreen-mode {
   border: 3px outset rgb(128, 18, 18);
 }
 
-/*acting as a fill screen semi-transparetn overlay onto the current screen*/
+/*acting as a fill screen semi-transparent overlay onto the current screen*/
 .modal {
   display: none;
   position: fixed;
