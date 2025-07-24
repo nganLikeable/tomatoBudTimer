@@ -1,3 +1,5 @@
+const originalTitle = document.title;
+
 let displayedTimer = document.getElementById("timer-display");
 
 let pomodoro = 25;
@@ -16,6 +18,11 @@ let endSound = document.querySelector("#audio");
 
 // for keypress Enter
 let isRunning = false;
+
+function resetTitle() {
+  document.title = originalTitle;
+}
+
 function setTimer(seconds) {
   clearInterval(timer); // clear the existing timer - stop
   duration = seconds;
@@ -37,33 +44,14 @@ function updateDisplay() {
   const minutes = Math.floor(remainingTime / 60);
   let seconds = remainingTime % 60;
   // convert nums to string so that they can be padded
-  displayedTimer.innerHTML = `${String(minutes).padStart(2, "0")}:${String(
+  const display = `${String(minutes).padStart(2, "0")}:${String(
     seconds
   ).padStart(2, "0")}`;
+  // update on-screen timer
+  displayedTimer.innerText = display;
+  // use display instead of displayedTimer bc the latter is a DOM object
+  document.title = `${display} | Tomato Bud Timer`;
 }
-
-// modal window
-const customTimerModal = document.getElementById("modal-custom-timer");
-const customTimerBtn = document.getElementById("custom-timer-btn");
-const closeModalBtn = document.getElementById("close-modal");
-
-function openModal(modalEl) {
-  modalEl.style.display = "block";
-}
-function closeModal(modalEl) {
-  modalEl.style.display = "none";
-}
-customTimerBtn.addEventListener("click", () => {
-  openModal(customTimerModal);
-});
-
-document.querySelectorAll(".close-modal").forEach((span) => {
-  span.addEventListener("click", () => {
-    const modal = span.closest(".modal");
-    closeModal(modal);
-  });
-});
-const doneModal = document.getElementById("modal-done");
 
 function start() {
   clearInterval(timer);
@@ -77,12 +65,14 @@ function start() {
       clearInterval(timer);
       openModal(doneModal);
       endSound.play();
+      resetTitle();
     }
   }, 300);
 }
 function reset() {
   clearInterval(timer);
   setTimer(duration);
+  resetTitle();
 }
 function pause() {
   clearInterval(timer); // stop with the current displayed time, not clear things out completely
@@ -173,6 +163,30 @@ fullscreenBtn.addEventListener("click", () => {
     });
   }
 });
+
+// modal window
+const customTimerModal = document.getElementById("modal-custom-timer");
+const customTimerBtn = document.getElementById("custom-timer-btn");
+const closeModalBtn = document.getElementById("close-modal");
+
+function openModal(modalEl) {
+  modalEl.style.display = "block";
+}
+function closeModal(modalEl) {
+  modalEl.style.display = "none";
+}
+customTimerBtn.addEventListener("click", () => {
+  openModal(customTimerModal);
+});
+
+document.querySelectorAll(".close-modal").forEach((span) => {
+  span.addEventListener("click", () => {
+    const modal = span.closest(".modal");
+    closeModal(modal);
+  });
+});
+const doneModal = document.getElementById("modal-done");
+
 // add dark mode
 // add to-do list
 // save the to-do for later
